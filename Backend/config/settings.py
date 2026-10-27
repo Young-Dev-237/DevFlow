@@ -37,9 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Bibliothèques tierces
+    'rest_framework',
+    'corsheaders',
+
+    # Applications du projet Team Manager
+    'users.apps.UsersConfig',
+    'projects.apps.ProjectsConfig',
+    'tasks.apps.TasksConfig',
+    'dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Doit être placé tout en haut pour CORS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +59,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Configuration CORS pour permettre au frontend React (localhost:5173) de communiquer avec Django
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'config.urls'
 
